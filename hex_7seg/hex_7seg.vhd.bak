@@ -1,0 +1,26 @@
+Library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity hex_7seg is
+
+	Port ( 
+		entradas : in bit_vector( 3 downto 0);
+		salidas : out bit_vector(6 downto 0)
+	);
+end entity;
+
+architecture arch1 of hex_7seg is
+ begin
+  with entradas select 
+		salidas <=  "0000001" when x"00",
+						"1001111" when x"11",
+						"0010010" when x"22",
+						"0000110" when x"33",
+						"1001100" when x"44",
+						"0100100" when x"55",
+						"0100000" when x"66",
+						"0001111" when x"77",
+						"0000000" when x"88",
+						"0000100" when x"99",
+						"1111110" when others;
+end architecture;

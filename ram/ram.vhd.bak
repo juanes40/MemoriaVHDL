@@ -1,0 +1,42 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity is ram is 
+	port (address : in std_logic_vector(7 downto 0);
+			data_in : in std_logic_vector(7 downto 0);
+			escribir , clock  : in std_logic;
+			data_out : out std_logic_vector(7 downto 0)
+				
+			);
+end entity;
+
+architecture ram_arch of ram is
+	
+type rw_type is array (128 to 223) of std_logic_vector(7 downto 0);
+signal RW : rw_type;
+	
+enable : process (address)
+	
+	begin
+		if ( (to_integer(unsigned(address)) >1⁄4 128) and
+			(to_integer(unsigned(address)) <1⁄4 223)) then	
+			EN <1⁄4 ’1’;
+		else
+			EN <1⁄4 ’0’;
+		end if;
+		
+end process;
+	
+memory : process (clock)
+	begin
+	 if (clock’event and clock1⁄4’1’) then
+	   if (EN1⁄4’1’ and write1⁄4’1’) then
+		RW(to_integer(unsigned(address))) <1⁄4 data_in;
+		elsif (EN1⁄4’1’ and write1⁄4’0’) then
+			data_out <1⁄4 RW(to_integer(unsigned(address)));
+		end if;
+	end if;
+end process;
+	
+end architecture;

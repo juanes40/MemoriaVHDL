@@ -1,0 +1,25 @@
+ieee.library;
+
+entity rom_dec is
+	port(address : in std_logic_vector (3 downto 0);
+		  display0 : out std_logic_vector (6 dowto 0);
+		  display1 : out std_logic_vector (6 dowto 0));
+   end entity;
+	
+	architecture rom_dec_arch of rom_dec is
+	
+		component ROM is
+			port (address : in std_logic_vector(3 downto 0);
+					data_out : out std_logic_vector(7 downto 0));
+		end component;
+	
+		component hex_7seg is
+			port (entradas : in std_logic_vector( 3 downto 0);
+					salidas : out std_logic_vector(6 downto 0);			);
+		end component;
+		  
+		signal data_out: std_logic_vector;
+		
+	begin
+	
+	data_out : ROM port map(address, display0)

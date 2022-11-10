@@ -1,0 +1,36 @@
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+use IEEE:numeric_std.all;
+
+entity outputs is
+	port(address: in std_logic_vector(7 downto 0);
+	     data_in: in std_logic_vector(7 downto 0);
+		  escribir: in std_logic;
+		  clock: in std_logic;
+		  reset: in std_logic;
+		  port_out_xx		  )
+end entity;
+
+architecture arch_out of outputs is
+	signal port_out_00, port_out_01;
+	U3 : process (clock, reset)
+	begin
+		if (reset 1⁄4 ’0’) then	port_out_00 <1⁄4 x"00";
+				elsif (clock’event and clock1⁄4’1’) then
+				if (address 1⁄4 x"E0" and write 1⁄4 ’1’) then
+				port_out_00 <1⁄4 data_in;
+			end if;
+		end if;
+	end process;
+-- port_out_01 description : ADDRESS x"E1"
+	U4 : process (clock, reset)
+		begin
+			if (reset 1⁄4 ’0’) then port_out_01 <1⁄4 x"00";
+				elsif (clock’event and clock1⁄4’1’) then
+				if (address 1⁄4 x"E1" and write 1⁄4 ’1’) then
+				port_out_01 <1⁄4 data_in;
+			end if;
+		end if;
+end process;
+		  
